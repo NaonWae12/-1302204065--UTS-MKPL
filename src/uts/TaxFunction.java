@@ -32,6 +32,10 @@ public class TaxFunction {
     private static final int SINGLE_DEDUCTIBLE = 54000000;
     private static final int CHILD_DEDUCTIBLE = 1500000;
 
+    /**
+     * Fungsi untuk menghitung jumlah pajak penghasilan pegawai yang harus
+     * dibayarkan setahun.
+     */
     public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible,
             boolean isMarried, int numberOfChildren) {
         int tax = 0;
@@ -45,15 +49,28 @@ public class TaxFunction {
         return Math.max(tax, 0);
     }
 
+    /**
+     * Fungsi untuk menghitung penghasilan kena pajak.
+     */
     private static int calculateTaxableIncome(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking,
             int deductible, boolean isMarried, int numberOfChildren) {
         int taxableIncome = ((monthlySalary + otherMonthlyIncome) * numberOfMonthWorking) - deductible;
-        if (isMarried) {
-            taxableIncome -= MARRIED_DEDUCTIBLE;
-        } else {
-            taxableIncome -= SINGLE_DEDUCTIBLE;
-        }
-        taxableIncome -= (numberOfChildren * CHILD_DEDUCTIBLE);
+        taxableIncome -= getDeductible(isMarried, numberOfChildren);
         return taxableIncome;
+    }
+
+    /**
+     * Fungsi untuk menghitung pengurangan pajak berdasarkan kondisi pernikahan dan
+     * jumlah anak.
+     */
+    private static int getDeductible(boolean isMarried, int numberOfChildren) {
+        int deductible = 0;
+        if (isMarried) {
+            deductible += MARRIED_DEDUCTIBLE;
+        } else {
+            deductible += SINGLE_DEDUCTIBLE;
+        }
+        deductible += numberOfChildren * CHILD_DEDUCTIBLE;
+        return deductible;
     }
 }
