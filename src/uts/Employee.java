@@ -62,6 +62,7 @@ public class Employee {
      * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
      */
 
+    // method setMonthlySalary menggunakan pendekatan polimorfisme
     public interface Grade {
         int getMonthlySalary();
     }
@@ -122,25 +123,25 @@ public class Employee {
         }
         monthlySalary = gradeImpl.getMonthlySalary();
     }
+    // polimorpism
 
-    // public void setMonthlySalary(int grade) {
-    // if (grade == 1) {
-    // monthlySalary = 3000000;
-    // if (isForeigner) {
-    // monthlySalary = (int) (3000000 * 1.5);
-    // }
-    // }else if (grade == 2) {
-    // monthlySalary = 5000000;
-    // if (isForeigner) {
-    // monthlySalary = (int) (3000000 * 1.5);
-    // }
-    // }else if (grade == 3) {
-    // monthlySalary = 7000000;
-    // if (isForeigner) {
-    // monthlySalary = (int) (3000000 * 1.5);
-    // }
-    // }
-    // }
+    private int calculateMonthsWorkedInYear() {
+        LocalDate now = LocalDate.now();
+        if (now.getYear() == yearJoined) {
+            return now.getMonthValue() - monthJoined;
+        } else {
+            return 12;
+        }
+    }
+
+    private int calculateFamilyDeduction() {
+        int familyDeduction = 0;
+        if (spouseIdNumber.equals("")) {
+            familyDeduction += 4500000;
+        }
+        familyDeduction += childIdNumbers.size() * 2250000;
+        return familyDeduction;
+    }
 
     public void setAnnualDeductible(int deductible) {
         this.annualDeductible = deductible;
