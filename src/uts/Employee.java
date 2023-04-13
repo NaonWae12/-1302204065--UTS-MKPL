@@ -13,6 +13,7 @@ import java.util.List;
  *
  * @author Saeful anwar
  */
+
 public class Employee {
     private String employeeId;
     private String firstName;
@@ -53,6 +54,46 @@ public class Employee {
 
         childNames = new LinkedList<String>();
         childIdNumbers = new LinkedList<String>();
+    }
+
+    public class Address {
+        private String adress;
+        private String city;
+
+        private String zipCode;
+
+        public Address(String adress, String city, String zipCode) {
+            this.adress = adress;
+            this.city = city;
+            ;
+            this.zipCode = zipCode;
+        }
+
+        // Setter methods
+        public void setStreet(String adress) {
+            this.adress = adress;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public void setZipCode(String zipCode) {
+            this.zipCode = zipCode;
+        }
+
+        // Getter methods
+        public String getStreet() {
+            return adress;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public String getZipCode() {
+            return zipCode;
+        }
     }
 
     /**
@@ -124,24 +165,6 @@ public class Employee {
         monthlySalary = gradeImpl.getMonthlySalary();
     }
     // polimorpism
-
-    private int calculateMonthsWorkedInYear() {
-        LocalDate now = LocalDate.now();
-        if (now.getYear() == yearJoined) {
-            return now.getMonthValue() - monthJoined;
-        } else {
-            return 12;
-        }
-    }
-
-    private int calculateFamilyDeduction() {
-        int familyDeduction = 0;
-        if (spouseIdNumber.equals("")) {
-            familyDeduction += 4500000;
-        }
-        familyDeduction += childIdNumbers.size() * 2250000;
-        return familyDeduction;
-    }
 
     public void setAnnualDeductible(int deductible) {
         this.annualDeductible = deductible;
